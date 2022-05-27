@@ -44,8 +44,14 @@
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
 <meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9e81656b21c54be79e718015cb613011.png">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/de0b049961864ab49947f5f157a773e9.png">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/eec1955da2044a1bbcdc110a31a43059.png">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
 <meta property="article:published_time" content="2022-05-25T12:48:31.000Z">
-<meta property="article:modified_time" content="2022-05-25T14:34:12.870Z">
+<meta property="article:modified_time" content="2022-05-27T07:34:58.682Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/f47b5d462e444cd1be26937579e22612.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA55WZ5bCG5LiA6Z2i5LiO6Iqx,size_20,color_FFFFFF,t_70,g_se,x_16">
@@ -238,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.8k 字
+          10k 字
         
       </span>
     
@@ -249,7 +255,7 @@
         
         
         
-          74 分钟
+          87 分钟
         
       </span>
     
@@ -428,6 +434,30 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">from</span> lxml <span class="hljs-keyword">import</span> etree<br><br><span class="hljs-comment"># url</span><br>url = <span class="hljs-string">&#x27;https://www.igxe.cn/market/csgo?ctg_id=5&amp;type_id=39&amp;sort=3&amp;page_size=20&#x27;</span><br>resp = requests.get(url)<br><span class="hljs-comment"># print(resp.text)</span><br><br><span class="hljs-comment"># 解析</span><br>html = etree.HTML(resp.text)<br>divs = html.xpath(<span class="hljs-string">&#x27;/html/body/div[1]/div/div/div[2]/div/div[4]/a&#x27;</span>)<br><span class="hljs-keyword">for</span> div <span class="hljs-keyword">in</span> divs:<br>    name = div.xpath(<span class="hljs-string">&quot;./div[2]/text()&quot;</span>)[<span class="hljs-number">0</span>]<br>    <span class="hljs-comment">#把爬取到的东西从字典中拿出来</span><br>    price = <span class="hljs-string">&#x27;&#x27;</span>.join(div.xpath(<span class="hljs-string">&#x27;./div[3]/div[1]//text()&#x27;</span>))<br>    <span class="hljs-comment"># 用x将字符串里面元素的连接起来组成一个新的字符串</span><br>    <span class="hljs-built_in">print</span>(name, price)<br></code></pre></td></tr></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" srcset="/img/loading.gif" lazyload alt="点击并拖拽以移动"></p>
+<h3 id="梨视频-防盗链"><a href="#梨视频-防盗链" class="headerlink" title="梨视频-防盗链"></a>梨视频-防盗链</h3><p>防盗链主要是针对客户端请求过程中所携带的一些关键信息来验证请求的合法性，而防盗链又有很多种，比如Referer防盗链、时间戳防盗链等等，这里只讲Referer防盗链。Referer用于告知服务器该请求是从哪个页面链接过来的。</p>
+<p>而这个正好是Referer防盗链，也就是要求溯源的网站要是原网站。</p>
+<p>简单说一下，就是爬取到的文件头id信息会与原视频不一样，直接访问是错误的。所以要加上原视频中的id信息，才能拿到真正的视频地址。</p>
+<p><img src="https://img-blog.csdnimg.cn/9e81656b21c54be79e718015cb613011.png" srcset="/img/loading.gif" lazyload alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" srcset="/img/loading.gif" lazyload alt="点击并拖拽以移动">编辑</p>
+<p>这时我们发现不仅仅是这样，好像还有UA检测。</p>
+<p><img src="https://img-blog.csdnimg.cn/de0b049961864ab49947f5f157a773e9.png" srcset="/img/loading.gif" lazyload alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" srcset="/img/loading.gif" lazyload alt="点击并拖拽以移动">编辑</p>
+<p>如果要下载这个视频的话，我们还可以这样做。</p>
+<p>补充：</p>
+<table>
+<thead>
+<tr>
+<th>wb</th>
+<th>以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"> <span class="hljs-comment"># 1.拿到contID</span><br><span class="hljs-comment"># 2.拿到videoStatus返回的json获取srcurl</span><br><span class="hljs-comment"># 3.修改srcurl中的内容</span><br><span class="hljs-comment"># 4.下载视频</span><br><span class="hljs-keyword">import</span> requests<br><span class="hljs-comment"># url</span><br>url = <span class="hljs-string">&#x27;https://www.pearvideo.com/video_1763380&#x27;</span><br>head = &#123;<span class="hljs-string">&quot;User-Agent&quot;</span> : <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36&quot;</span><br>                     <span class="hljs-string">&quot; (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36&quot;</span>,<br>        <span class="hljs-string">&#x27;Referer&#x27;</span>: url&#125;<br><span class="hljs-comment"># UA伪装以及防盗链溯源（本次请求的上级网站是谁）</span><br>contID = url.split(<span class="hljs-string">&#x27;_&#x27;</span>)[<span class="hljs-number">1</span>]<br><span class="hljs-comment"># 用split函数拿下真实的id</span><br><br>videoStatus = <span class="hljs-string">f&quot;https://www.pearvideo.com/videoStatus.jsp?contId=<span class="hljs-subst">&#123;contID&#125;</span>&amp;mrd=0.536576632294897&quot;</span><br><span class="hljs-comment"># python的print字符串前面加f表示格式化字符串，加f后可以在字符串里面使用用花括号括起来的变量和表达式，插入真实id</span><br>resp = requests.get(videoStatus,headers=head)<br><span class="hljs-comment">#</span><br>dic = resp.json()<br><span class="hljs-comment"># 因为要获取两个内容，所以先定义个字典，方便使用</span><br>srcUrl = dic[<span class="hljs-string">&#x27;videoInfo&#x27;</span>][<span class="hljs-string">&#x27;videos&#x27;</span>][<span class="hljs-string">&#x27;srcUrl&#x27;</span>]<br><span class="hljs-comment"># 获取视频url的框架</span><br>systemTime = dic[<span class="hljs-string">&#x27;systemTime&#x27;</span>]<br><span class="hljs-comment"># 获取要被替换的内容</span><br>srcUrl = srcUrl.replace(systemTime, <span class="hljs-string">f&#x27;cont-<span class="hljs-subst">&#123;contID&#125;</span>&#x27;</span>)<br><span class="hljs-comment"># 把真正的id替换原来的那个东西</span><br><br><span class="hljs-comment"># 下载视频</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;li.mp4&quot;</span>, mode=<span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-comment"># 创建并打开一个叫li.mp4的文件，用二进制模式写入</span><br>    f.write(requests.get(srcUrl).content)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;ok!&#x27;</span>)<br><span class="hljs-comment"># 这里也是要求返回的是二进制的数据，所以用.content![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)</span><br></code></pre></td></tr></table></figure>
+
+<p> 爬到啦！下载可能有点慢。</p>
+<p><img src="https://img-blog.csdnimg.cn/eec1955da2044a1bbcdc110a31a43059.png" srcset="/img/loading.gif" lazyload alt="img"> <img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" srcset="/img/loading.gif" lazyload alt="点击并拖拽以移动"></p>
 
               
             </div>
